@@ -1,0 +1,282 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Теперь отступы сжимаются внутрь и не раздувают блоки */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Современный шрифт без засечек */
+    line-height: 1.6;             /* Комфортный межстрочный интервал для чтения */
+    background-color: #fdfaf3;    /* Молочный фон страницы */
+    color: #1b2a4a;               /* Глубокий синий вместо едкого черного */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 3. Стили для шапки сайта */
+header {
+    background-color: #1e3a8a;    /* Глубокий синий цвет фона */
+    color: #fdfaf3;               /* Молочный цвет для текста заголовка */
+    padding: 30px 20px;           /* Внутренние отступы: 30px сверху/снизу, 20px слева/справа */
+    text-align: center;
+    /* Превращаем шапку во флекс-контейнер */
+    display: flex;
+    justify-content: space-between; /* Название уйдет влево, меню — вправо */
+    align-items: center;         /* Выравнивает их строго по центру по вертикали */
+    flex-wrap: wrap;             /* На узких экранах меню переносится под заголовок */
+    gap: 15px;
+}
+
+header h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;          /* Небольшое расстояние между буквами */
+    margin-bottom: 0;             /* Убираем отступ, так как они теперь на одной линии */
+}
+
+/* Меню навигации */
+nav ul {
+    display: flex;      /* Элементы меню теперь тоже флексы */
+    gap: 20px;          /* Удобное расстояние между ссылками вместо маргинов */
+    list-style: none;
+    padding: 0;         /* убираем стандартный отступ списка */
+    margin: 0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0; /* Обнуляем старые маргины, за них теперь отвечает gap */
+}
+
+nav ul li a {
+    color: #fdfaf3;               /* Молочные ссылки */
+    text-decoration: none;        /* Убираем стандартное подчеркивание ссылок */
+    font-weight: 600;             /* Делаем шрифт ссылок полужирным */
+    transition: color 0.3s ease;  /* Плавное изменение цвета при наведении */
+}
+
+/* Псевдокласс :hover — что происходит при наведении курсора */
+nav ul li a:hover {
+    color: #7ea0e0;               /* При наведении ссылка плавно станет светло-синей */
+}
+
+/* 4. Основной контейнер содержимого */
+main {
+    max-width: 1100px;            /* Сайт не будет растягиваться шире 1100 пикселей */
+    margin: 40px auto;            /* Внешние отступы: 40px сверху/снизу, а 'auto' центрирует весь блок по горизонтали */
+    padding: 0 20px;              /* Защитные отступы по бокам, чтобы на смартфонах текст не лип к экрану */
+    /* ВКЛЮЧАЕМ FLEXBOX */
+    display: flex;     /* Делает блок main флекс-контейнером */
+    gap: 30px;         /* Создает автоматический удобный зазор в 30px между колонками */
+    align-items: flex-start;
+}
+
+/* Раздел со статьями */
+section h2 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    margin-bottom: 25px;          /* Отступ от заголовка секции до первой статьи */
+}
+
+/* Карточка отдельной статьи */
+article {
+    background-color: #ffffff;    /* Чистый белый фон карточки */
+    padding: 30px;                /* Щедрый внутренний отступ для создания "воздуха" вокруг текста */
+    margin-bottom: 35px;          /* Расстояние между соседними карточками статей */
+    border-radius: 8px;           /* Мягкое скругление углов карточки */
+    border: 1px solid #dbe4f5;    /* Тонкая, едва заметная синеватая рамка */
+    box-shadow: 0 4px 6px rgba(30, 58, 138, 0.08); /* Легкая тень для эффекта объема */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Шапка внутри статьи (заголовок и дата) */
+article header h3 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+}
+
+article header p {
+    font-size: 0.9rem;
+    color: #4a5a7a;               /* Сине-серый цвет для даты */
+    margin-bottom: 15px;
+}
+
+/* Текст статьи */
+article p {
+    color: #1b2a4a;               /* Чуть более мягкий цвет для основного чтения */
+    margin-bottom: 20px;          /* Отступ до подвала статьи */
+}
+
+/* Подвал внутри статьи (теги) */
+article footer {
+    border-top: 1px dashed #dbe4f5; /* Пунктирная линия, отделяющая теги */
+    padding-top: 15px;            /* Отступ сверху от линии до тегов */
+    font-size: 0.9rem;
+    color: #148f77;               /* Бирюзовый цвет для тегов */
+    font-weight: bold;
+}
+
+/* 5. Боковая панель (сайдбар) */
+aside {
+    background-color: #eef2fb;    /* Молочно-синеватый фон, отличный от фона страницы */
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 6px solid #1e3a8a; /* Толстая акцентная полоса слева */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+aside h3 {
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+aside p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+/* Глобальный подвал всего сайта */
+body > footer {
+    background-color: #2c4a7c;    /* Чуть более светлый оттенок глубокого синего, чем у шапки */
+    color: #fdfaf3;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;             /* Большой отступ от контента до самого низа */
+    font-size: 0.9rem;
+}
+
+body > footer a {
+    color: #a9c0e8;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+body > footer a:hover {
+    text-decoration: underline;   /* Возвращаем подчеркивание только при наведении */
+}
+
+/* Основная колонка со статьями */
+main section {
+    flex: 7; /* Занимает 7 частей из 10 (или примерно 70% ширины) */
+}
+
+/* Боковая панель */
+main aside {
+    flex: 3; /* Занимает 3 части из 10 (или примерно 30% ширины) */
+}
+
+/* --- СТИЛИ ДЛЯ ТЕМНОЙ ТЕМЫ --- */
+body.dark-theme {
+    background-color: #0f1a33; /* Глубокий синий фон страницы */
+    color: #fdfaf3;            /* Молочный текст */
+}
+
+body.dark-theme header {
+    background-color: #0a1428; /* Еще более темная шапка */
+}
+
+body.dark-theme article {
+    background-color: #16233f; /* Темные карточки статей */
+    border-color: #2a3d66;
+}
+
+body.dark-theme aside {
+    background-color: #16233f;   /* Тёмный фон сайдбара в темной теме */
+    border-left-color: #7ea0e0;
+    border-color: #2a3d66;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme article header h3,
+body.dark-theme section h2,
+body.dark-theme aside h3 {
+    color: #fdfaf3;              /* Молочные заголовки в темной теме */
+}
+
+body.dark-theme article header p,
+body.dark-theme article p {
+    color: #a9b6d0;
+}
+
+body.dark-theme article footer {
+    border-top-color: #2a3d66;
+}
+
+body.dark-theme body > footer,
+body.dark-theme footer {
+    background-color: #0a1428;
+}
+
+/* Стили для самой кнопки */
+.theme-btn {
+    background-color: #148f77;
+    color: #fdfaf3;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: background 0.3s ease;
+}
+
+.theme-btn:hover {
+    background-color: #16a085;
+}
+
+body.dark-theme .theme-btn {
+    background-color: #7ea0e0;
+    color: #0f1a33;
+}
+
+body.dark-theme .theme-btn:hover {
+    background-color: #a9c0e8;
+}
+
+.article-text.short {
+    display: -webkit-box;
+    line-clamp: 1; /* Ограничиваем текст всего одной строкой */
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.search-container { margin-bottom: 25px; }
+
+#searchInput {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #dbe4f5;
+    border-radius: 6px;
+    outline: none;
+    background-color: #ffffff;
+    color: #1b2a4a;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #1e3a8a;
+}
+
+body.dark-theme #searchInput {
+    background-color: #16233f;
+    color: #fdfaf3;
+    border-color: #2a3d66;
+}
+
+body.dark-theme #searchInput:focus {
+    border-color: #7ea0e0;
+}
+
+/* Адаптив для узких экранов */
+@media (max-width: 800px) {
+    main {
+        flex-direction: column;
+    }
+    main section,
+    main aside {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+}

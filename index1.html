@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учебный курс по физике | Главная</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Шапка сайта (Заголовок и навигация) -->
+<header>
+<h1>Сборник планов уроков</h1>
+<nav>
+<ul>
+<li><a href="#home">Главная</a></li>
+<li><a href="#articles">Сборники</a></li>
+<li><a href="#about">Обо мне</a></li>
+<li><button class="theme-btn" id="themeBtn">🌙 Тёмная тема</button></li>
+</ul>
+</nav>
+</header>
+
+<!-- Основное содержимое страницы (только одно на странице) -->
+<main>
+
+<section id="articles">
+    <h2>Публикации</h2>
+    <!-- Поле живого поиска -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Введите название статьи для поиска...">
+    </div>
+    <!-- В этот пустой контейнер JavaScript будет вставлять наши статьи -->
+    <div id="postsContainer"></div>
+</section>
+
+<!-- Боковая панель (Дополнительный контент, косвенно связанный с основным) -->
+<aside id="about">
+<h3>Об авторе</h3>
+<p>Меня зовут Алиса. Я являюсь учителем физики и разрабатываю методические пособия.</p>
+<h3>Подписка</h3>
+<p>Следите за мной в Telegram и YouTube.</p>
+</aside>
+
+</main>
+
+<!-- Подвал сайта (Юридическая информация, копирайт) -->
+<footer>
+<p>&copy; 2026 Учебный курс по физике. Все права защищены.</p>
+<p><a href="#privacy">Политика конфиденциальности</a></p>
+</footer>
+
+<script>
+// Массив статей — используется в renderArticles и поиске
+const initialArticles = [
+    {
+        title: 'Введение в кинематику — 1 урок',
+        date: '9 класс',
+        isoDate: '2026-09-01',
+        text: 'Что изучает кинематика. Механическое движение, тело отсчёта, система координат, материальная точка. Относительность движения. Основные понятия: траектория, путь, перемещение.',
+        tags: '#кинематика #9класс'
+    },
+    {
+        title: 'Прямолинейное равномерное движение — 2 урок',
+        date: '9 класс',
+        isoDate: '2026-09-08',
+        text: 'Определение равномерного прямолинейного движения. Скорость, её направление и единицы измерения. Формула скорости и перемещения. Графики скорости и координаты от времени.',
+        tags: '#кинематика #9класс'
+    },
+    {
+        title: 'Решение задач по теме «Прямолинейное равномерное движение» — 3 урок',
+        date: '9 класс',
+        isoDate: '2026-09-15',
+        text: 'Практикум: задачи на нахождение скорости, пути и времени. Чтение и построение графиков равномерного движения. Разбор типовых задач ОГЭ.',
+        tags: '#кинематика #9класс'
+    },
+    {
+        title: 'Прямолинейное равноускоренное движение — 4 урок',
+        date: '9 класс',
+        isoDate: '2026-09-22',
+        text: 'Ускорение, его физический смысл и единицы измерения. Формулы скорости и перемещения при равноускоренном движении. Графики ускорения и скорости. Свободное падение как пример.',
+        tags: '#кинематика #9класс'
+    },
+    {
+        title: 'Решение задач по теме «Прямолинейное равноускоренное движение» — 5 урок',
+        date: '9 класс',
+        isoDate: '2026-09-29',
+        text: 'Практикум: задачи на формулы скорости и перемещения при равноускоренном движении. Чтение графиков. Разбор задач повышенной сложности и подготовка к ОГЭ.',
+        tags: '#кинематика #9класс'
+    }
+];
+
+// 1. Находим нашу кнопку по её ID
+const themeButton = document.getElementById('themeBtn');
+
+// 2. Вешаем слушатель события клик
+themeButton.addEventListener('click', function() {
+    // 3. Переключаем класс dark-theme на самом верхнем уровне — у тега body
+    document.body.classList.toggle('dark-theme');
+
+    // 4. Меняем текст на кнопке в зависимости от темы
+    if (document.body.classList.contains('dark-theme')) {
+        themeButton.textContent = '☀ Светлая тема';
+    } else {
+        themeButton.textContent = '🌙 Тёмная тема';
+    }
+});
+
+const postsContainer = document.getElementById('postsContainer');
+
+function renderArticles(articlesArray) {
+    // Очищаем контейнер перед каждым рендером, чтобы статьи не дублировались
+    postsContainer.innerHTML = '';
+
+    // Если ничего не найдено, выводим сообщение
+    if (articlesArray.length === 0) {
+        postsContainer.innerHTML = '<p class="no-results">Ничего не найдено</p>';
+        return;
+    }
+
+    // Проходим циклом по каждому объекту в массиве
+    articlesArray.forEach(article => {
+        const articleHtml = `
+            <article>
+                <header>
+                    <h3>${article.title}</h3>
+                    <p>Опубликовано: <time datetime="${article.isoDate}">${article.date}</time></p>
+                </header>
+                <p>${article.text}</p>
+                <footer>
+                    <p>Теги: ${article.tags}</p>
+                </footer>
+            </article>
+        `;
+        postsContainer.insertAdjacentHTML('beforeend', articleHtml);
+    });
+}
+
+// Запускаем первичный рендер при загрузке страницы
+renderArticles(initialArticles);
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', function(event) {
+    const searchText = event.target.value.toLowerCase().trim();
+
+    const filteredArticles = initialArticles.filter(article => {
+        const inTitle = article.title.toLowerCase().includes(searchText);
+        const inText = article.text.toLowerCase().includes(searchText);
+        const inTags = article.tags.toLowerCase().includes(searchText);
+        return inTitle || inText || inTags;
+    });
+
+    renderArticles(filteredArticles);
+});
+</script>
+
+</body>
+</html>
